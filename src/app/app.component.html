@@ -1,0 +1,149 @@
+<!--interpolation binding + component style-->
+<h1 class="heading">Hello Angular {{ title }}</h1>
+<h1>{{ getValue() }}</h1>
+<h2>{{ 2 * 2 }}</h2>
+<h2>{{ title == "firstproj" }}</h2>
+<app-login></app-login>
+<app-user-list></app-user-list>
+<app-student-list></app-student-list>
+<app-country-list></app-country-list>
+<button (click)="getName()">Click me</button>
+<button (click)="getName()">Click me 2</button>
+<button (click)="getPara('123', 'Krupali')">Click me 3</button>
+<br /><br />
+
+<input
+  type="text"
+  name="user-name"
+  value="{{ name }}"
+  disabled="{{ disable }}"
+/>
+<!--property binding-->
+<input type="text" name="user-name" [value]="name" [disabled]="disable" />
+<br /><br />
+
+<!--two way binding-->
+<p>Two way binding</p>
+<input type="text" [(ngModel)]="anyname" />
+<h3>{{ anyname }}</h3>
+
+<!--event in angular-->
+<button (click)="getData('hello')">Call Function</button>
+<input
+  type="text"
+  #box
+  (keyup)="getData(box.value)"
+  placeholder="event keyup"
+/>
+<input
+  type="text"
+  #box1
+  (keydown)="getData(box1.value)"
+  placeholder="event keydown"
+/>
+<input
+  type="text"
+  #box2
+  (blur)="getData(box2.value)"
+  placeholder="event blur"
+/>
+<input
+  type="text"
+  #box3
+  (input)="getData(box3.value)"
+  placeholder="event input"
+/>
+<h3 (mouseover)="getData('over')">When mouse comes over it ,it will call</h3>
+<h3 (mouseleave)="getData('leave')">When mouse leave the sentence</h3>
+
+<!--get input box value and display-->
+<input
+  type="text"
+  #box4
+  (keyup)="getData(box4.value)"
+  placeholder="Enter Name"
+  name="name"
+/>
+<p>Box value is: {{ displayVal }}</p>
+
+<input type="text" #box5 placeholder="Enter Name" name="name" />
+<button (click)="getData(box5.value)">Click</button>
+<p>Box value is: {{ displayVal }}</p>
+
+<!--Make Counter-->
+<h3>Counter with Angular</h3>
+<button (click)="counter('minus')">--</button>
+<p>Count:{{ count }}</p>
+<button (click)="counter('add')">++</button>
+
+<!--Component Style
+css should be written in particular component css file-->
+
+<!--Globle style
+css should be written in styles.css-->
+
+<!--internal style
+always highest priority given to internam styling-->
+<style>
+  .heading {
+    color: blue;
+  }
+</style>
+
+<!--If-Else-->
+<h3 *ngIf="show; else elseBlock">Condition will be true</h3>
+<ng-template #elseBlock>
+  <h3>Else Condition</h3>
+</ng-template>
+
+<h1 *ngIf="show; then ifBlock; else elseBlock"></h1>
+<ng-template #ifBlock>
+  <h3>If Block</h3>
+</ng-template>
+<ng-template #elseBlock>
+  <h3>Else Block</h3>
+</ng-template>
+
+<!--Multiple condition or else if-->
+<ng-template [ngIf]="color === 'red'">
+  <h2 style="color: red">Red color</h2>
+</ng-template>
+<ng-template [ngIf]="color === 'green'">
+  <h2 style="color: green">Green color</h2>
+</ng-template>
+<ng-template [ngIf]="color === 'blue'">
+  <h2 style="color: blue">Blue color</h2>
+</ng-template>
+
+<!--Switch Case-->
+<div [ngSwitch]="color">
+  <h3 *ngSwitchCase="'red'" style="color: red">Red Color</h3>
+  <h3 *ngSwitchCase="'blue'" style="color: blue">Blue Color</h3>
+  <h3 *ngSwitchCase="'green'" style="color: green">Green Color</h3>
+  <h3 *ngSwitchCase="'orange'" style="color: orange">Orange Color</h3>
+  <h3 *ngSwitcdefault>Unknown Color</h3>
+
+  <!--Loop-->
+  <h3 *ngFor="let item of users">Name is:{{ item }}</h3>
+  <h3 *ngFor="let item of userDetails">
+    {{ item.name }} -- {{ item.email }} -- {{ item.phone }}
+  </h3>
+
+  <!--Nested Loop-->
+  <ul *ngFor="let item of userInfo">
+    <li>{{ item.name }}</li>
+    <li>{{ item.email }}</li>
+    <ul *ngFor="let account of item.socialAccounts">
+      <li>{{ account }}</li>
+    </ul>
+  </ul>
+</div>
+
+<!--Routing-->
+<a routerLink="admin">Admin</a>
+<br /><br />
+<a routerLink="country-list">Country List</a>
+<br /><br />
+<router-outlet></router-outlet>
+
+<!--Dynamic routing-->
